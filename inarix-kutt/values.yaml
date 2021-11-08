@@ -1,22 +1,27 @@
+# File              : values.yaml
+# Author            : Alexandre Saison <alexandre.saison@inarix.com>
+# Date              : 08.11.2021
+# Last Modified Date: 08.11.2021
+# Last Modified By  : Alexandre Saison <alexandre.saison@inarix.com>
 # Values for redis
 redis:
   auth:
     # -- Redis password
-    password: "fakepassword"
+    password: ""
 
 app:
   # -- Maximum length of sha after shorten URL
   linkLength: 6
   # -- List of email adress of users with Admin rights
-  adminEmails: "alexandre.saison@inarix.com,artemis@inarix.com,guillaume@inarix.com"
+  adminEmails: ""
   # -- Email of the maintainer
-  reportEmail: "alexandre.saison@inarix.com"
+  reportEmail: ""
   # -- jwt secret to encode jwt password
   jwtSecret: ""
   # -- Application port
   port: 3000
   # -- Site name
-  siteName: "Inarix Kutt"
+  siteName: "Kutt"
   # -- Daily limit shortened URL per user
   dailyLimit: 50
 
@@ -74,20 +79,20 @@ service:
   type: ClusterIP
   port: 3000
 
-ingress:
-  enabled: true
-  className: "nginx"
-  annotations: 
-    kubernetes.io/tls-acme: "true"
-  hosts:
-    - host: kutt.inarix.com
-      paths:
-        - path: /
-          pathType: ImplementationSpecific
-  tls: 
-   - secretName: inarix-kutt-tls
-     hosts:
-       - kutt.inarix.com
+ingress: {}
+  #  enabled: false
+  #  className: "nginx"
+  #  annotations: 
+  #    kubernetes.io/tls-acme: "true"
+  #  hosts:
+  #    - host: kutt.example.com
+  #      paths:
+  #        - path: /
+  #          pathType: ImplementationSpecific
+  #  tls: 
+  #   - secretName: example-kutt-tls
+  #     hosts:
+  #       - kutt.example.com
 
 resources:
   limits:
@@ -97,8 +102,9 @@ resources:
     cpu: 100m
     memory: 128Mi
 
-nodeSelector: 
-  name: ""
+nodeSelector: {}
+  # name: ""
+
 
 tolerations: []
 

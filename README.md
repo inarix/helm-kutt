@@ -1,6 +1,6 @@
 # inarix-kutt
 
-![Version: 0.1.0](https://img.shields.io/badge/Version-0.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.16.0](https://img.shields.io/badge/AppVersion-1.16.0-informational?style=flat-square)
+![Version: 1.0.0](https://img.shields.io/badge/Version-1.0.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.16.0](https://img.shields.io/badge/AppVersion-1.16.0-informational?style=flat-square)
 
 A Helm chart for Kubernetes
 
@@ -8,41 +8,49 @@ A Helm chart for Kubernetes
 
 | Repository | Name | Version |
 |------------|------|---------|
-| https://kubernetes-charts.storage.googleapis.com/ | redis | >0.1.0 |
+| https://charts.bitnami.com/bitnami | redis | >=15.5.0 |
 
 ## Values
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | affinity | object | `{}` |  |
+| app.adminEmails | string | `""` | List of email adress of users with Admin rights |
+| app.dailyLimit | int | `50` | Daily limit shortened URL per user |
+| app.jwtSecret | string | `""` | jwt secret to encode jwt password |
 | app.linkLength | int | `6` | Maximum length of sha after shorten URL |
+| app.port | int | `3000` | Application port |
+| app.reportEmail | string | `""` | Email of the maintainer |
+| app.siteName | string | `"Kutt"` | Site name |
+| db.host | string | `""` |  |
+| db.name | string | `""` |  |
+| db.password | string | `""` |  |
+| db.user | string | `""` |  |
 | fullnameOverride | string | `""` |  |
 | image.pullPolicy | string | `"Always"` |  |
-| image.repository | string | `"894517829775.dkr.ecr.eu-west-1.amazonaws.com/inarix-kutt"` |  |
+| image.repository | string | `"kutt/kutt"` |  |
 | image.tag | string | `""` |  |
 | imagePullSecrets | list | `[]` |  |
-| ingress.annotations."kubernetes.io/tls-acme" | string | `"true"` |  |
-| ingress.className | string | `"nginx"` |  |
-| ingress.enabled | bool | `false` |  |
-| ingress.hosts[0].host | string | `"kutt.inarix.com"` |  |
-| ingress.hosts[0].paths[0].path | string | `"/"` |  |
-| ingress.hosts[0].paths[0].pathType | string | `"ImplementationSpecific"` |  |
-| ingress.tls[0].hosts[0] | string | `"kutt.inarix.com"` |  |
-| ingress.tls[0].secretName | string | `"inarix-kutt-tls"` |  |
+| ingress | object | `{}` |  |
+| mail.host | string | `"smtp.gmail.com"` |  |
+| mail.password | string | `""` |  |
+| mail.port | int | `465` |  |
+| mail.user | string | `""` |  |
 | nameOverride | string | `""` |  |
-| nodeSelector.name | string | `""` |  |
+| nodeSelector | object | `{}` |  |
 | podAnnotations | object | `{}` |  |
 | podSecurityContext | object | `{}` |  |
+| probes.initialDelaySeconds | int | `60` |  |
+| probes.interval | int | `15` |  |
+| probes.timeout | int | `120` |  |
+| redis.auth.password | string | `""` | Redis password |
 | replicaCount | int | `1` |  |
 | resources.limits.cpu | string | `"100m"` |  |
 | resources.limits.memory | string | `"128Mi"` |  |
 | resources.requests.cpu | string | `"100m"` |  |
 | resources.requests.memory | string | `"128Mi"` |  |
-| securityContext.capabilities.drop[0] | string | `"ALL"` |  |
-| securityContext.readOnlyRootFilesystem | bool | `true` |  |
-| securityContext.runAsNonRoot | bool | `true` |  |
-| securityContext.runAsUser | int | `1000` |  |
-| service.port | int | `80` |  |
+| securityContext | object | `{}` |  |
+| service.port | int | `3000` |  |
 | service.type | string | `"ClusterIP"` |  |
 | serviceAccount.annotations | object | `{}` |  |
 | serviceAccount.create | bool | `true` |  |
