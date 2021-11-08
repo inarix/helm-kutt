@@ -1,0 +1,110 @@
+# Values for redis
+redis:
+  auth:
+    # -- Redis password
+    password: "fakepassword"
+
+app:
+  # -- Maximum length of sha after shorten URL
+  linkLength: 6
+  # -- List of email adress of users with Admin rights
+  adminEmails: "alexandre.saison@inarix.com,artemis@inarix.com,guillaume@inarix.com"
+  # -- Email of the maintainer
+  reportEmail: "alexandre.saison@inarix.com"
+  # -- jwt secret to encode jwt password
+  jwtSecret: ""
+  # -- Application port
+  port: 3000
+  # -- Site name
+  siteName: "Inarix Kutt"
+  # -- Daily limit shortened URL per user
+  dailyLimit: 50
+
+mail:
+  host: "smtp.gmail.com"
+  port: 465
+  user: ""
+  password: ""
+
+db: 
+  name: ""
+  host: ""
+  user: ""
+  password: ""
+
+
+# Default values for inarix-kutt.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+replicaCount: 1
+
+image:
+  repository: kutt/kutt
+  pullPolicy: Always
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: ClusterIP
+  port: 3000
+
+ingress:
+  enabled: true
+  className: "nginx"
+  annotations: 
+    kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: kutt.inarix.com
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: 
+   - secretName: inarix-kutt-tls
+     hosts:
+       - kutt.inarix.com
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+nodeSelector: 
+  name: ""
+
+tolerations: []
+
+affinity: {}
+
+probes:
+  initialDelaySeconds: 60
+  interval: 15
+  timeout: 120

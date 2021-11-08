@@ -1,0 +1,28 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: {{ .Release.Name }}-config
+data:
+  DEFAULT_DOMAIN: kutt.inarix.com
+  SITE_NAME: {{ .Values.app.siteName }}
+  JWT_SECRET: {{ .Values.app.jwtSecret }}
+  LINK_LENGTH: {{ .Values.app.linkLength | quote }}
+  ADMIN_EMAILS: {{ .Values.app.adminEmails }}
+  REPORT_EMAIL: {{ .Values.app.reportEmail }}
+  DISALLOW_ANONYMOUS_LINKS: "true"
+  DISALLOW_REGISTRATION: "false"
+  USER_LIMIT_PER_DAY: {{ .Values.app.dailyLimit | quote }}
+  NON_USER_COOLDOWN: "1"
+  PORT: {{ .Values.app.port | quote }}
+  DB_USER: {{ .Values.db.user }}
+  DB_HOST: {{ .Values.db.host }}
+  DB_NAME: {{ .Values.db.name }}
+  REDIS_HOST: {{.Release.Name }}-redis-master
+  REDIS_DISABLED: "false"
+  REDIS_PORT: "6379"
+  REDIS_PASSWORD: {{ .Values.redis.auth.password }}
+  MAIL_HOST: {{ .Values.mail.host }}
+  MAIL_PORT: {{ .Values.mail.port | quote  }}
+  MAIL_SECURE: "false"
+  MAIL_USER: {{ .Values.mail.user }}
+  MAIL_PASSWORD: {{ .Values.mail.password }}
