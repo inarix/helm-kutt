@@ -79,20 +79,21 @@ service:
   type: ClusterIP
   port: 3000
 
-ingress: {}
-  #  enabled: false
-  #  className: "nginx"
-  #  annotations: 
-  #    kubernetes.io/tls-acme: "true"
-  #  hosts:
-  #    - host: kutt.example.com
-  #      paths:
-  #        - path: /
-  #          pathType: ImplementationSpecific
-  #  tls: 
-  #   - secretName: example-kutt-tls
-  #     hosts:
-  #       - kutt.example.com
+ingress:
+   enabled: true
+   className: "nginx"
+   annotations: 
+     kubernetes.io/tls-acme: "true"
+     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+   hosts:
+     - host: kutt.inarix.com
+       paths:
+         - path: /
+           pathType: ImplementationSpecific
+   tls: 
+    - secretName: inarix-kutt-tls
+      hosts:
+        - kutt.inarix.com
 
 resources:
   limits:
